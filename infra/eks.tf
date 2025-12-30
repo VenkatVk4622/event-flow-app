@@ -3,7 +3,7 @@ resource "aws_eks_cluster" "this" {
   role_arn = aws_iam_role.eks_cluster_role.arn
 
   vpc_config {
-    subnet_ids = data.aws_subnets.default.ids
+    subnet_ids = data.aws_subnets.eks.ids
   }
 
   depends_on = [
@@ -15,7 +15,7 @@ resource "aws_eks_node_group" "this" {
   cluster_name    = aws_eks_cluster.this.name
   node_group_name = "${var.eks_cluster_name}-node-group"
   node_role_arn  = aws_iam_role.eks_node_role.arn
-  subnet_ids     = data.aws_subnets.default.ids
+  subnet_ids     = data.aws_subnets.eks.ids
 
   instance_types = [var.node_instance_type]
 
