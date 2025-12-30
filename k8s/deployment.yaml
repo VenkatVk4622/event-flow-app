@@ -2,28 +2,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: event-flow-app
-  labels:
-    app: event-flow
 spec:
-  replicas: 1   # base replica (HPA will scale)
+  replicas: 1
   selector:
     matchLabels:
-      app: event-flow
+      app: event-flow-app
   template:
     metadata:
       labels:
-        app: event-flow
+        app: event-flow-app
     spec:
       containers:
-        - name: event-flow-container
-          image: 509399632114.dkr.ecr.us-east-1.amazonaws.com/event-flow-app:latest
+        - name: event-flow-app
+          image: 509399632114.dkr.ecr.us-east-1.amazonaws.com/event-flow-app:5
           imagePullPolicy: Always
           ports:
             - containerPort: 8000
-          resources:
-            requests:
-              cpu: "100m"
-              memory: "128Mi"
-            limits:
-              cpu: "500m"
-              memory: "256Mi"
