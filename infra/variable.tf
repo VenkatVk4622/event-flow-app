@@ -15,3 +15,15 @@ variable "ecr_repository_name" {
   type        = string
   default     = "event-flow-app"
 }
+
+variable "eks_cluster_name" {
+  description = "EKS cluster name"
+  type        = string
+  default     = "event-flow-cluster"
+}
+
+variable "node_instance_type" {
+  description = "EKS node instance type"
+  type        = string
+  default     = "t3.medium"
+}
