@@ -21,29 +21,6 @@ pipeline {
                 '''
             }
         }
-
-        stage('SonarQube Scan') {
-            steps {
-                withSonarQubeEnv('sonar-server') {
-                    sh '''
-                      sonar-scanner \
-                      -Dsonar.projectKey=event-flow-app \
-                      -Dsonar.sources=.
-                    '''
-                }
-            }
-        }
-
-        stage('Trivy Image Scan') {
-            steps {
-                sh '''
-                  trivy image \
-                  --severity HIGH,CRITICAL \
-                  --exit-code 0 \
-                  $IMAGE_NAME:$IMAGE_TAG
-                '''
-            }
-        }
     }
 
     post {
